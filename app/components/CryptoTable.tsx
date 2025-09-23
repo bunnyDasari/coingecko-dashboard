@@ -36,7 +36,6 @@ interface CryptoTableProps {
 }
 
 export default function CryptoTable({
-    searchTerm,
     isLoading = false,
     cryptosList: initialCryptosList,
 }: CryptoTableProps) {
@@ -144,6 +143,7 @@ export default function CryptoTable({
                             {isLoading ? (
                                 Array.from({ length: 8 }).map((_, i) => <LoadingRow key={i} />)
                             ) : (
+
                                 initialCryptosList.map((crypto: any) => (
                                     <tr
                                         key={crypto.id}

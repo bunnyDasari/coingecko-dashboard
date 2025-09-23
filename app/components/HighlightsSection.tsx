@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TrendingUp, TrendingDown, Activity } from 'lucide-react';
 import { on } from 'events';
 
