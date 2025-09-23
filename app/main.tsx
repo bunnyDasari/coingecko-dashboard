@@ -45,8 +45,6 @@ function Main() {
             return;
         }
         setCryptosList(filteredCryptos)
-
-        console.log(filteredCryptos)
     }
 
     const TopLosers = () => {
