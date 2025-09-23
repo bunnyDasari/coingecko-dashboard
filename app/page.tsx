@@ -1,103 +1,102 @@
-import Image from "next/image";
+'use client';
+import React, { useState, useEffect } from 'react';
+import Header from './components/Header';
+import HighlightsSection from './components/HighlightsSection';
+import CryptoTable from './components/CryptoTable';
 
-export default function Home() {
+function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [cryptosList, setCryptosList] = useState([]);
+  const [topGainers, settopGainers] = useState([])
+  const [topLosers, settopLosers] = useState([])
+  const [highestVolume, sethighestVolume] = useState([])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    onClickBtn()
+
+    return () => clearTimeout(timer);
+
+  }, []);
+
+  const onClickBtn = async () => {
+    const res = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&names=Bitcoin&symbols=btc&category=layer-1&price_change_percentage=1h", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    const data = await res.json();
+    setCryptosList(data)
+    TopLosers()
+    console.log({ data })
+  }
+
+  const searchHandler = () => {
+    const filteredCryptos = cryptosList.filter((crypto: any) =>
+      crypto.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      crypto.symbol.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setCryptosList(filteredCryptos)
+    console.log(filteredCryptos)
+  }
+
+  const TopLosers = () => {
+    const filterArrray = cryptosList.filter((crypto: any) => {
+      if (crypto.price_change_percentage_24h < 0) {
+        return crypto
+      }
+    })
+    settopLosers(filterArrray)
+    console.log(filterArrray)
+  }
+
+  const TopGainers = () => {
+    const filterArrray = cryptosList.filter((crypto: any) => {
+      if (crypto.price_change_percentage_24h > 0) {
+        return crypto
+      }
+    })
+    settopGainers(filterArrray)
+    console.log(filterArrray)
+  }
+
+  const HighestVolume = () => {
+    const filterArrray = cryptosList.filter((crypto: any) => {
+      if (crypto.total_volume > 0) {
+        return crypto
+      }
+    })
+    sethighestVolume(filterArrray)
+    console.log(filterArrray)
+  }
+
+
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <Header searchTerm={searchTerm} onSearchChange={setSearchTerm} searchHandler={searchHandler} />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-3">
+            Cryptocurrency Market Overview
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            Track real-time prices, market caps, and trading volumes for all cryptocurrencies
+          </p>
         </div>
+
+
+        <HighlightsSection isLoading={isLoading} TopLosers={TopLosers} TopGainers={TopGainers} HighestVolume={HighestVolume} topGainers={topGainers} topLosers={topLosers} highestVolume={highestVolume}/>
+
+        <CryptoTable searchTerm={searchTerm} isLoading={isLoading} cryptosList={cryptosList} />
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    </div >
   );
 }
+
+export default App;
