@@ -35,3 +35,4 @@ git clone https://github.com/bunnyDasari/coingecko-dashboard.git
 cd cryptodash
 npm install
 npm run dev
+

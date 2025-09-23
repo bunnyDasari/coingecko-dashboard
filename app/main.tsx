@@ -40,7 +40,12 @@ function Main() {
             crypto.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
             crypto.symbol.toLowerCase().includes(searchTerm.toLowerCase())
         );
+        if (filteredCryptos.length === 0) {
+            alert("No matching cryptocurrencies found.");
+            return;
+        }
         setCryptosList(filteredCryptos)
+
         console.log(filteredCryptos)
     }
 
