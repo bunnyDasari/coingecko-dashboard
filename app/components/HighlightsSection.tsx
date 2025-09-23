@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { TrendingUp, TrendingDown, Activity } from 'lucide-react';
-import { on } from 'events';
+
 
 interface HighlightCoin {
     name: string;
@@ -65,7 +65,6 @@ export default function HighlightsSection({ isLoading = false, TopLosers, TopGai
                     coins.map((coin, index) => (
                         <div key={index} className="flex items-center justify-between bg-white/10 rounded-lg p-3 backdrop-blur-sm">
                             <div className="flex items-center space-x-3">
-                                {/* <span className="text-lg">{coin.logo}</span> */}
                                 <div>
                                     <div className="font-medium">{coin.name}</div>
                                     <div className="text-sm opacity-80">{coin.symbol}</div>
@@ -75,10 +74,6 @@ export default function HighlightsSection({ isLoading = false, TopLosers, TopGai
                                 <div className="font-bold">
                                     ${coin.price_change_24h < 1 ? coin.price_change_24h : coin.price_change_24h.toLocaleString()}
                                 </div>
-                                {/* <div className={`text-sm font-medium ${coin.change >= 0 ? 'text-green-200' : 'text-red-200'
-                                    }`}>
-                                    {coin.change >= 0 ? '+' : ''}{coin.change.toFixed(2)}%
-                                </div> */}
                             </div>
                         </div>
                     ))

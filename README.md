@@ -15,7 +15,7 @@ A responsive cryptocurrency dashboard built with **Next.js**, **Tailwind CSS**, 
 ---
 
 ## Demo
-Vercel deployment.
+Vercel deployment - https://coingecko-dashboard-e6mk.vercel.app/.
 
 ---
 
@@ -31,7 +31,7 @@ Vercel deployment.
 
 1. **Clone the repository**
 ```bash
-Clone repo
+git clone https://github.com/bunnyDasari/coingecko-dashboard.git
 cd cryptodash
 npm install
 npm run dev

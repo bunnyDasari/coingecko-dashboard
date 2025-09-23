@@ -58,7 +58,6 @@ export default function CoinModal({
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4">
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto sm:rounded-2xl sm:w-full">
-                {/* Header */}
                 <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
                     <div className="flex items-center space-x-4">
                         <div>
@@ -78,7 +77,7 @@ export default function CoinModal({
                     </button>
                 </div>
 
-                {/* Price Section */}
+
                 <div className="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mb-4 gap-2 sm:gap-0">
                         <div className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
@@ -100,7 +99,6 @@ export default function CoinModal({
                     </div>
                 </div>
 
-                {/* Stats Grid */}
                 <div className="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div className="space-y-4">
@@ -142,7 +140,7 @@ export default function CoinModal({
                     </div>
                 </div>
 
-                {/* Description */}
+
                 <div className="p-4 sm:p-6">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
                         About {coin.name}
@@ -152,7 +150,7 @@ export default function CoinModal({
                             `${coin.name} (${coin.symbol}) is a cryptocurrency that has gained significant attention in the digital asset space. It represents innovation in blockchain technology and continues to evolve with market demands and technological advancements.`}
                     </p>
 
-                    {/* Buttons */}
+
                     <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:space-x-4">
                         <button className="flex items-center justify-center space-x-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors w-full sm:w-auto">
                             <ExternalLink className="h-4 w-4" />
