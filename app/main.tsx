@@ -35,6 +35,7 @@ function Main() {
         console.log({ data })
     }
 
+    console.log(cryptosList)
     const searchHandler = () => {
         const filteredCryptos = cryptosList.filter((crypto: any) =>
             crypto.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -53,7 +54,7 @@ function Main() {
                 return crypto
             }
         })
-        settopLosers(filterArrray)
+        settopLosers(filterArrray.slice(0, 5))
         console.log(filterArrray)
     }
 
@@ -63,7 +64,7 @@ function Main() {
                 return crypto
             }
         })
-        settopGainers(filterArrray)
+        settopGainers(filterArrray.slice(0, 5))
         console.log(filterArrray)
     }
 
@@ -73,7 +74,7 @@ function Main() {
                 return crypto
             }
         })
-        sethighestVolume(filterArrray)
+        sethighestVolume(filterArrray.slice(0, 5))
         console.log(filterArrray)
     }
 
