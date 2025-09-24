@@ -62,7 +62,7 @@ export default function CoinModal({
                     <div className="flex items-center space-x-4">
                         <div>
                             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
-                                {coin.id}
+                                {coin.name}
                             </h2>
                             <p className="text-gray-500 dark:text-gray-400 font-medium text-sm sm:text-base">
                                 {coin.symbol} • Rank #{coin.market_cap_rank}
@@ -94,7 +94,7 @@ export default function CoinModal({
                             ) : (
                                 <TrendingDown className="h-4 w-4" />
                             )}
-                            <span>{coin.market_cap_change_24h.toFixed(2)}%</span>
+                            <span>{coin.price_change_24h.toFixed(2)}%</span>
                         </div>
                     </div>
                 </div>

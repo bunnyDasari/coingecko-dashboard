@@ -51,6 +51,7 @@ export default function CryptoTable({
             setSortBy(key);
             setSortOrder("asc");
         }
+        console.log("clciked")
     };
 
     const handleRowClick = (coin: Cryptocurrency) => {
