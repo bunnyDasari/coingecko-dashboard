@@ -24,7 +24,7 @@ interface HighlightsSectionProps {
 
 export default function HighlightsSection({ isLoading = false, TopLosers, TopGainers, HighestVolume, topGainers, topLosers, highestVolume }: HighlightsSectionProps) {
 
-
+    const [show, setShow] = React.useState(false)
     const LoadingSkeleton = () => (
         <div className="animate-pulse">
             <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-2"></div>
@@ -33,10 +33,18 @@ export default function HighlightsSection({ isLoading = false, TopLosers, TopGai
         </div>
     );
     const onClickHighlightCard = () => {
-        TopGainers && TopGainers()
-        TopLosers && TopLosers()
-        HighestVolume && HighestVolume()
+
+        if (!show) {
+            TopGainers && TopGainers()
+            TopLosers && TopLosers()
+            HighestVolume && HighestVolume()
+            setShow(true)
+        } else {
+            return;
+        }
+
     }
+
     const HighlightCard = ({
         title,
         coins,
